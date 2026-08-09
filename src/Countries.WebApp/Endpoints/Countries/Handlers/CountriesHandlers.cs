@@ -1,9 +1,18 @@
-﻿namespace Countries.WebApp.Endpoints.Countries.Handlers;
+using Countries.Application.Contracts.Countries;
+using Countries.Application.DTOs.Parameters.Countries;
+using Countries.Application.DTOs.Responses;
+using Countries.Application.DTOs.Responses.Countries;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Countries.WebApp.Endpoints.Countries.Handlers;
 
 public static class CountriesHandlers
 {
-    public static Task GetListCountriesAsync()
+    public static async Task<ResultResponse<ListCountriesResponse>> GetListCountriesAsync([AsParameters] ListCountriesParameters parameters, [FromServices] ICountriesServices services, CancellationToken cancellationToken = default)
     {
-
+        ResultResponse<ListCountriesResponse> response =
+            await services.ListCountriesAsync(parameters: parameters, cancellationToken: cancellationToken).ConfigureAwait(ConfigureAwaitOptions.None);
+        
+        return response;
     }
 }

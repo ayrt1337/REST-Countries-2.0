@@ -1,20 +1,18 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Countries.Application.DTOs.Responses.Countries;
 
-public sealed record CountriesResponse(
-    [property: JsonPropertyName("data")]
-    CountriesDataResponse Data
-);
-
-public sealed record CountriesDataResponse(
-    [property: JsonPropertyName("objects")]
-    IEnumerable<CountryResponse> Countries,
-    [property: JsonPropertyName("meta")]
-    CountriesPaginationResponse Pagination
-);
-
 public sealed record CountryResponse(
+    [property: JsonPropertyName("data")]
+    CountryDetailDataResponse Data
+);
+
+public sealed record CountryDetailDataResponse(
+    [property: JsonPropertyName("objects")]
+    IEnumerable<CountryItemResponse> Countries
+);
+
+public sealed record CountryItemResponse(
     [property: JsonPropertyName("names")]
     CountryNames Names,
     [property: JsonPropertyName("codes")]
@@ -39,9 +37,7 @@ public sealed record CountryResponse(
 
 public sealed record CountryNames(
     [property: JsonPropertyName("common")]
-    string CommonName,
-    [property: JsonPropertyName("official")]
-    string OfficialName
+    string CommonName
 );
 
 public sealed record CountryCodes(

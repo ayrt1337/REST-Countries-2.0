@@ -1,6 +1,6 @@
 ﻿namespace Countries.Application.Config;
 
-public class RestCountriesOptions(string restCountriesApiKey)
+public sealed class RestCountriesOptions()
 {
-    public string RestCountriesApiKey { get; init; } = restCountriesApiKey;
+    public string RestCoutriesApiKey { get; init; } = string.Empty;
 }

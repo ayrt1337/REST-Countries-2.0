@@ -10,7 +10,7 @@ public class HttpDelegationHandler(IOptions<RestCountriesOptions> options) : Del
 
     protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        request.Headers.Add("Authorization", $"Token {_options.RestCountriesApiKey}");
+        request.Headers.Add("Authorization", $"Bearer {_options.RestCoutriesApiKey}");
         return base.SendAsync(request, cancellationToken);
     }
 }
