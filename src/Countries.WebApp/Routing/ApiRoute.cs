@@ -12,12 +12,12 @@ public static class ApiRoute
         
         public static class List
         {
-            public const string route = Route + Slash + ApiConstants.CommonRoute.List;
+            public const string route = Slash + ApiConstants.CommonRoute.List;
         }
 
         public static class GetByCode
         {
-            public const string route = Route + Slash + ApiConstants.CommonRoute.GetByCode;
+            public const string route = Slash + ApiConstants.CommonRoute.GetByCode;
         }
     }
 }

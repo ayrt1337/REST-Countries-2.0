@@ -1,42 +1,43 @@
 ﻿using System.Text.Json;
-using System.Xml;
 using Countries.Application.Abstractions;
 using Countries.Application.DTOs.Responses;
-using Countries.Application.DTOs.Responses.Countries;
+using Countries.Application.Serialization;
 using Countries.Application.Services.Shared;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Countries.Infrastructure.Transporters;
 
-public sealed class RestCountriesTransport(HttpClient httpClient, IHttpExtensions httpExtensions) : IRestCountriesTransport
+public sealed class RestCountriesTransport(HttpClient httpClient, IHttpExtensions httpExtensions)
+    : IRestCountriesTransport
 {
-    private readonly JsonSerializerOptions _defaultOptions = new (options: Application.Serialization.DefaultOptions.Serializer);
+    private readonly JsonSerializerOptions _defaultOptions = new(DefaultOptions.Serializer);
 
     public async Task<ResultResponse<TData>> SendAsync<TData>(string address, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(address);
 
-        using HttpResponseMessage response = await httpClient.GetAsync(requestUri: address, completionOption: HttpCompletionOption.ResponseHeadersRead, cancellationToken: cancellationToken).ConfigureAwait(ConfigureAwaitOptions.None);
+        using var response = await httpClient
+            .GetAsync(address, HttpCompletionOption.ResponseHeadersRead, cancellationToken)
+            .ConfigureAwait(ConfigureAwaitOptions.None);
 
-        ResultResponse<ReadOnlyMemory<byte>> result = await httpExtensions.GetResultAsync(response, cancellationToken);
+        var result = await httpExtensions.GetResultAsync(response, cancellationToken);
 
         if (!response.IsSuccessStatusCode)
-            return ResultResponse<TData>.Create(statusCode: response.StatusCode, message: result.Message);
+            return ResultResponse<TData>.Create(response.StatusCode, result.Message);
 
         if (result.Data.Span.IsEmpty)
-            return ResultResponse<TData>.CreateBadGateway(message: "Conteúdo não retornado.");
+            return ResultResponse<TData>.CreateBadGateway("Conteúdo não retornado.");
 
         try
         {
-            TData? data = JsonSerializer.Deserialize<TData>(result.Data.Span, _defaultOptions);
+            var data = JsonSerializer.Deserialize<TData>(result.Data.Span, _defaultOptions);
 
             return data is null
-                ? ResultResponse<TData>.CreateBadGateway(message: "Conteúdo não retornado.")
-                : ResultResponse<TData>.CreateOk(message: result.Message, data: data);
+                ? ResultResponse<TData>.CreateBadGateway("Conteúdo não retornado.")
+                : ResultResponse<TData>.CreateOk(result.Message, data);
         }
         catch (JsonException)
         {
-            return ResultResponse<TData>.CreateBadGateway(message: "Conteúdo retornado não compatível com contrato.");
+            return ResultResponse<TData>.CreateBadGateway("Conteúdo retornado não compatível com contrato.");
         }
     }
 }

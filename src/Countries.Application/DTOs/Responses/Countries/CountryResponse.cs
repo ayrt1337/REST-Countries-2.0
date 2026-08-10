@@ -37,12 +37,14 @@ public sealed record CountryItemResponse(
 
 public sealed record CountryNames(
     [property: JsonPropertyName("common")]
-    string CommonName
+    string CommonName,
+    [property: JsonPropertyName("official")]
+    string OfficialName
 );
 
 public sealed record CountryCodes(
-    [property: JsonPropertyName("cioc")]
-    string CiocCode
+    [property: JsonPropertyName("alpha_3")]
+    string Alpha3
 );
 
 public sealed record CountryCapital(
