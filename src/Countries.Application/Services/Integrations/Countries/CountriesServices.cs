@@ -10,7 +10,7 @@ internal sealed class CountriesServices(IRestCountriesTransport transport) : ICo
 {
     public async Task<ResultResponse<ListCountriesResponse>> ListCountriesAsync(ListCountriesParameters parameters, CancellationToken cancellationToken = default)
     {
-        string query = "?limit=50&response_fields=&names.common,names.official,codes.alpha_3,capitals,flag.url_svg,population";
+        string query = "?classification.iso_status=official&limit=50&response_fields=&names.common,names.official,codes.alpha_3,capitals,flag.url_svg,population";
 
         if (parameters.Page > 1)
             query += $"&offset={parameters.Page * 50}";
