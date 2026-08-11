@@ -15,4 +15,12 @@ public static class CountriesHandlers
         
         return response;
     }
-}
+
+    public static async Task<ResultResponse<CountryResponse>> GetCountryAsync([AsParameters] GetContryParameters parameters, [FromServices] ICountriesServices services, CancellationToken cancellationToken = default)
+    {
+        ResultResponse<CountryResponse> response =
+            await services.GetCountryAsync(parameters: parameters, cancellationToken: cancellationToken).ConfigureAwait(ConfigureAwaitOptions.None);
+
+        return response;
+    }
+} 

@@ -7,4 +7,6 @@ namespace Countries.Application.Contracts.Countries;
 public interface ICountriesServices
 {
     Task<ResultResponse<ListCountriesResponse>> ListCountriesAsync(ListCountriesParameters parameters, CancellationToken cancellationToken = default);
+
+    Task<ResultResponse<CountryResponse>> GetCountryAsync(GetContryParameters parameters, CancellationToken cancellationToken = default);
 }

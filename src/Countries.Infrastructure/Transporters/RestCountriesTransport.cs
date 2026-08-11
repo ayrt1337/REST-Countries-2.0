@@ -6,8 +6,7 @@ using Countries.Application.Services.Shared;
 
 namespace Countries.Infrastructure.Transporters;
 
-public sealed class RestCountriesTransport(HttpClient httpClient, IHttpExtensions httpExtensions)
-    : IRestCountriesTransport
+public sealed class RestCountriesTransport(HttpClient httpClient, IHttpExtensions httpExtensions) : IRestCountriesTransport
 {
     private readonly JsonSerializerOptions _defaultOptions = new(DefaultOptions.Serializer);
 
