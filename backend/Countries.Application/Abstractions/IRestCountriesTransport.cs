@@ -1,5 +1,4 @@
 ﻿using Countries.Application.DTOs.Responses;
-using Countries.Application.DTOs.Responses.Countries;
 
 namespace Countries.Application.Abstractions;
 
