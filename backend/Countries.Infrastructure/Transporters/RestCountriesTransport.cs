@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using Countries.Application.Abstractions;
 using Countries.Application.DTOs.Responses;
 using Countries.Application.Serialization;
@@ -6,7 +6,7 @@ using Countries.Application.Services.Shared;
 
 namespace Countries.Infrastructure.Transporters;
 
-public sealed class RestCountriesTransport(HttpClient httpClient, IHttpExtensions httpExtensions) : IRestCountriesTransport
+public sealed class RestCountriesTransport(HttpClient httpClient, HttpExtensions httpExtensions) : IRestCountriesTransport
 {
     private readonly JsonSerializerOptions _defaultOptions = new(DefaultOptions.Serializer);
 
@@ -24,19 +24,19 @@ public sealed class RestCountriesTransport(HttpClient httpClient, IHttpExtension
             return ResultResponse<TData>.Create(response.StatusCode, result.Message);
 
         if (result.Data.Span.IsEmpty)
-            return ResultResponse<TData>.CreateBadGateway("Conteúdo não retornado.");
+            return ResultResponse<TData>.CreateBadGateway("No content returned.");
 
         try
         {
             var data = JsonSerializer.Deserialize<TData>(result.Data.Span, _defaultOptions);
 
             return data is null
-                ? ResultResponse<TData>.CreateBadGateway("Conteúdo não retornado.")
+                ? ResultResponse<TData>.CreateBadGateway("No content returned.")
                 : ResultResponse<TData>.CreateOk(result.Message, data);
         }
         catch (JsonException)
         {
-            return ResultResponse<TData>.CreateBadGateway("Conteúdo retornado não compatível com contrato.");
+            return ResultResponse<TData>.CreateBadGateway("Returned content does not match contract.");
         }
     }
 }

@@ -2,5 +2,5 @@
 
 public sealed class RestCountriesOptions()
 {
-    public string RestCoutriesApiKey { get; init; } = string.Empty;
+    public string RestCountriesApiKey { get; init; } = string.Empty;
 }

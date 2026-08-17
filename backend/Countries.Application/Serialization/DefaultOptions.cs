@@ -9,6 +9,6 @@ public static class DefaultOptions
         PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-        MaxDepth = 32,
+        MaxDepth = 32
     };
 }

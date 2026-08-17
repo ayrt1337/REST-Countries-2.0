@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 
 namespace Countries.Application.DTOs.Responses;
 
@@ -19,6 +19,9 @@ public readonly record struct ResultResponse<TData>(HttpStatusCode StatusCode, s
     public static ResultResponse<TData> CreateBadGateway(string message, TData? data = default) =>
         new(StatusCode: HttpStatusCode.BadGateway, Message: message, Data: data);
 
-    public static ResultResponse<TData> CreateInternaServerlError(string message, TData? data = default) =>
+    public static ResultResponse<TData> CreateInternalServerError(string message = "An internal server error occurred.", TData? data = default) =>
         new(StatusCode: HttpStatusCode.InternalServerError, Message: message, Data: data);
+
+    public static ResultResponse<TData> CreateInternaServerlError(string message, TData? data = default) =>
+        CreateInternalServerError(message, data);
 }

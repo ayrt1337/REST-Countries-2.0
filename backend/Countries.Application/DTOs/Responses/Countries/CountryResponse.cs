@@ -30,7 +30,47 @@ public sealed record CountryItemResponse(
     [property: JsonPropertyName("continents")]
     IEnumerable<string> Continents,
     [property: JsonPropertyName("borders")]
-    IEnumerable<string> Borders,
+    IEnumerable<BorderCountryResponse> Borders,
+    [property: JsonPropertyName("population")]
+    long Population
+);
+
+public sealed record BorderCountryResponse(
+    [property: JsonPropertyName("commonName")]
+    string CommonName,
+    [property: JsonPropertyName("alpha3")]
+    string Alpha3
+);
+
+public sealed record RestCountryResponse(
+    [property: JsonPropertyName("data")]
+    RestCountryDetailDataResponse Data
+);
+
+public sealed record RestCountryDetailDataResponse(
+    [property: JsonPropertyName("objects")]
+    IEnumerable<RestCountryItemResponse> Countries
+);
+
+public sealed record RestCountryItemResponse(
+    [property: JsonPropertyName("names")]
+    CountryNames Names,
+    [property: JsonPropertyName("codes")]
+    CountryCodes Codes,
+    [property: JsonPropertyName("capitals")]
+    IEnumerable<CountryCapital> Capitals,
+    [property: JsonPropertyName("flag")]
+    CountryFlag Flag,
+    [property: JsonPropertyName("currencies")]
+    IEnumerable<RestCountryCurrencies> Currencies,
+    [property: JsonPropertyName("region")]
+    string Region,
+    [property: JsonPropertyName("subregion")]
+    string SubRegion,
+    [property: JsonPropertyName("continents")]
+    IEnumerable<string> Continents,
+    [property: JsonPropertyName("borders")]
+    IEnumerable<string>? Borders,
     [property: JsonPropertyName("population")]
     long Population
 );
