@@ -29,7 +29,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
         <button
           type="button"
           onClick={onRetry}
-          className="flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-red-700 active:scale-95 dark:bg-red-600 dark:hover:bg-red-700"
+          className="flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-red-700 active:scale-95 dark:bg-red-600 dark:hover:bg-red-700"
         >
           <RefreshCcw className="h-4 w-4" />
           <span>{retryLabel}</span>

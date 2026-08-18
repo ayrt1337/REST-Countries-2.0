@@ -60,7 +60,7 @@ export const SelectDropdown: React.FC<SelectDropdownProps> = ({
         onClick={() => setIsOpen((prev) => !prev)}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        className="flex w-full cursor-pointer items-center justify-between rounded-lg bg-white px-6 py-4 text-sm font-semibold text-gray-900 shadow-sm transition-all duration-200 hover:shadow-md focus:outline-hidden dark:bg-[#2b3844] dark:text-white dark:shadow-md"
+        className="flex h-14 w-full cursor-pointer items-center justify-between rounded-lg bg-white px-6 text-sm font-semibold text-gray-900 shadow-sm transition-all duration-200 hover:shadow-md focus:outline-hidden dark:bg-[#2b3844] dark:text-white dark:shadow-md"
       >
         <span className="truncate font-semibold">
           {selectedOption ? selectedOption.label : placeholder}

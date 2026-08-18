@@ -29,7 +29,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
 
   return (
     <div
-      className={`relative flex w-full max-w-md items-center rounded-lg bg-white shadow-sm transition-all duration-200 focus-within:ring-2 focus-within:ring-blue-500/20 dark:bg-[#2b3844] dark:shadow-md dark:focus-within:ring-blue-400/20 ${className}`}
+      className={`relative flex h-14 w-full max-w-md items-center rounded-lg bg-white shadow-sm transition-all duration-200 focus-within:ring-2 focus-within:ring-blue-500/20 dark:bg-[#2b3844] dark:shadow-md dark:focus-within:ring-blue-400/20 ${className}`}
     >
       <div className="pointer-events-none pl-6 pr-3 text-gray-400 dark:text-gray-300">
         <Search className="h-5 w-5" />
@@ -42,7 +42,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         aria-label={placeholder}
-        className="w-full bg-transparent py-4 pr-10 text-sm font-semibold text-gray-900 placeholder:text-gray-400 placeholder:font-normal focus:outline-hidden dark:text-white dark:placeholder:text-gray-300 sm:text-base"
+        className="h-full w-full bg-transparent pr-10 text-sm font-semibold text-gray-900 placeholder:text-gray-400 placeholder:font-normal focus:outline-hidden dark:text-white dark:placeholder:text-gray-300"
       />
       {value && (
         <button

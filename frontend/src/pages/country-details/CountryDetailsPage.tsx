@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router';
-import { ArrowLeft } from 'lucide-react';
-import { Layout } from '../../components/layout/Layout';
-import { ErrorMessage } from '../../components/common/ErrorMessage';
-import { fetchCountryByCode } from '../../services/country-service';
-import { getApiErrorMessage } from '../../services/verify-api-error';
-import type { CountryDetailItem } from '../../types/country';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router";
+import { ArrowLeft } from "lucide-react";
+import { Layout } from "../../components/layout/Layout";
+import { ErrorMessage } from "../../components/common/ErrorMessage";
+import { fetchCountryByCode } from "../../services/country-service";
+import { getApiErrorMessage } from "../../services/verify-api-error";
+import type { CountryDetailItem } from "../../types/country";
 
 export const CountryDetailsPage: React.FC = () => {
   const { code } = useParams<{ code: string }>();
@@ -17,7 +17,7 @@ export const CountryDetailsPage: React.FC = () => {
 
   useEffect(() => {
     if (!code) {
-      setError('Country code not provided.');
+      setError("Country code not provided.");
       setIsLoading(false);
       return;
     }
@@ -34,8 +34,8 @@ export const CountryDetailsPage: React.FC = () => {
       })
       .catch((err) => {
         if (isMounted) {
-          console.error('Failed to load country details:', err);
-          setError(getApiErrorMessage(err, 'Unable to load country details.'));
+          console.error("Failed to load country details:", err);
+          setError(getApiErrorMessage(err, "Unable to load country details."));
         }
       })
       .finally(() => {
@@ -53,23 +53,36 @@ export const CountryDetailsPage: React.FC = () => {
     if (window.history.length > 2) {
       navigate(-1);
     } else {
-      navigate('/');
+      navigate("/");
     }
   };
 
-  const commonName = country?.names?.common || country?.names?.official || 'Unknown Country';
-  const nativeName = country?.names?.official || country?.names?.common || 'N/A';
-  const populationText = country?.population != null ? country.population.toLocaleString('en-US') : '0';
-  const regionText = country?.region || 'N/A';
-  const subregionText = country?.subregion || 'N/A';
-  
-  const capitalsText = country?.capitals && country.capitals.length > 0
-    ? country.capitals.map((c) => c.name).filter(Boolean).join(', ')
-    : 'N/A';
+  const commonName =
+    country?.names?.common || country?.names?.official || "Unknown Country";
+  const nativeName =
+    country?.names?.official || country?.names?.common || "N/A";
+  const populationText =
+    country?.population != null
+      ? country.population.toLocaleString("en-US")
+      : "0";
+  const regionText = country?.region || "N/A";
+  const subregionText = country?.subregion || "N/A";
 
-  const currenciesText = country?.currencies && country.currencies.length > 0
-    ? country.currencies.map((c) => c.name).filter(Boolean).join(', ')
-    : 'N/A';
+  const capitalsText =
+    country?.capitals && country.capitals.length > 0
+      ? country.capitals
+          .map((c) => c.name)
+          .filter(Boolean)
+          .join(", ")
+      : "N/A";
+
+  const currenciesText =
+    country?.currencies && country.currencies.length > 0
+      ? country.currencies
+          .map((c) => c.name)
+          .filter(Boolean)
+          .join(", ")
+      : "N/A";
 
   const borders = country?.borders || [];
 
@@ -117,7 +130,11 @@ export const CountryDetailsPage: React.FC = () => {
               setError(null);
               fetchCountryByCode(code)
                 .then((data) => setCountry(data))
-                .catch((err) => setError(getApiErrorMessage(err, 'Unable to load country details.')))
+                .catch((err) =>
+                  setError(
+                    getApiErrorMessage(err, "Unable to load country details."),
+                  ),
+                )
                 .finally(() => setIsLoading(false));
             }
           }}
@@ -126,7 +143,7 @@ export const CountryDetailsPage: React.FC = () => {
         <ErrorMessage
           title="Country not found"
           message="We could not find the requested country details."
-          onRetry={() => navigate('/')}
+          onRetry={() => navigate("/")}
           retryLabel="Back to Home"
         />
       ) : (
@@ -153,31 +170,55 @@ export const CountryDetailsPage: React.FC = () => {
             <div className="grid grid-cols-1 gap-8 text-sm sm:grid-cols-2 sm:text-base mb-10">
               <div className="space-y-3">
                 <p>
-                  <span className="font-bold text-gray-900 dark:text-white">Native Name: </span>
-                  <span className="text-gray-700 dark:text-gray-300">{nativeName}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    Native Name:{" "}
+                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {nativeName}
+                  </span>
                 </p>
                 <p>
-                  <span className="font-bold text-gray-900 dark:text-white">Population: </span>
-                  <span className="text-gray-700 dark:text-gray-300">{populationText}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    Population:{" "}
+                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {populationText}
+                  </span>
                 </p>
                 <p>
-                  <span className="font-bold text-gray-900 dark:text-white">Region: </span>
-                  <span className="text-gray-700 dark:text-gray-300">{regionText}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    Region:{" "}
+                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {regionText}
+                  </span>
                 </p>
                 <p>
-                  <span className="font-bold text-gray-900 dark:text-white">Sub Region: </span>
-                  <span className="text-gray-700 dark:text-gray-300">{subregionText}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    Sub Region:{" "}
+                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {subregionText}
+                  </span>
                 </p>
                 <p>
-                  <span className="font-bold text-gray-900 dark:text-white">Capital: </span>
-                  <span className="text-gray-700 dark:text-gray-300">{capitalsText}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    Capital:{" "}
+                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {capitalsText}
+                  </span>
                 </p>
               </div>
 
               <div className="space-y-3">
                 <p>
-                  <span className="font-bold text-gray-900 dark:text-white">Currencies: </span>
-                  <span className="text-gray-700 dark:text-gray-300">{currenciesText}</span>
+                  <span className="font-bold text-gray-900 dark:text-white">
+                    Currencies:{" "}
+                  </span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {currenciesText}
+                  </span>
                 </p>
               </div>
             </div>
@@ -189,8 +230,10 @@ export const CountryDetailsPage: React.FC = () => {
               <div className="flex flex-wrap items-center gap-2.5">
                 {borders.length > 0 ? (
                   borders.map((border) => {
-                    const borderName = typeof border === 'string' ? border : border.commonName;
-                    const borderCode = typeof border === 'string' ? border : border.alpha3;
+                    const borderName =
+                      typeof border === "string" ? border : border.commonName;
+                    const borderCode =
+                      typeof border === "string" ? border : border.alpha3;
                     return (
                       <Link
                         key={borderCode}
@@ -202,7 +245,9 @@ export const CountryDetailsPage: React.FC = () => {
                     );
                   })
                 ) : (
-                  <span className="text-sm text-gray-500 dark:text-gray-400">None</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                    None
+                  </span>
                 )}
               </div>
             </div>

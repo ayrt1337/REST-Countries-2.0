@@ -9,12 +9,9 @@ using Countries.Application.Services.Shared;
 
 namespace Countries.Application.Services.Integrations.Countries;
 
-internal sealed class CountriesServices(
-    IRestCountriesTransport transport,
-    IMemoryCache cache
-) : ICountriesServices
+internal sealed class CountriesServices(IRestCountriesTransport transport, IMemoryCache cache) : ICountriesServices
 {
-    private static readonly TimeSpan DefaultCacheDuration = TimeSpan.FromHours(6);
+    private static readonly TimeSpan DefaultCacheDuration = TimeSpan.FromDays(7);
 
     public async Task<ResultResponse<ListCountriesResponse>> ListCountriesAsync(ListCountriesParameters parameters, CancellationToken cancellationToken = default)
     {

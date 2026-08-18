@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from '../../context/ThemeContext';
+import React from "react";
+import { Link } from "react-router";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "../../context/ThemeContext";
 
 export const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -19,10 +19,12 @@ export const Navbar: React.FC = () => {
         <button
           type="button"
           onClick={toggleTheme}
-          aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          aria-label={
+            theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"
+          }
           className="flex cursor-pointer items-center gap-2 text-sm font-semibold text-gray-800 transition-opacity hover:opacity-75 focus:outline-hidden sm:text-base dark:text-white"
         >
-          {theme === 'dark' ? (
+          {theme === "dark" ? (
             <>
               <Sun className="h-4 w-4 fill-current sm:h-5 sm:w-5" />
               <span>Light Mode</span>

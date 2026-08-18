@@ -81,8 +81,8 @@ export const Pagination: React.FC<PaginationProps> = ({
               aria-current={isActive ? 'page' : undefined}
               className={`flex h-10 min-w-10 cursor-pointer items-center justify-center rounded-lg px-3 text-sm font-bold transition-all ${
                 isActive
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 dark:bg-blue-600 dark:text-white'
-                  : 'bg-white text-gray-700 shadow-sm hover:bg-gray-50 hover:shadow-md dark:bg-[#2b3844] dark:text-gray-200 dark:hover:bg-slate-700'
+                  ? 'bg-blue-600 text-white dark:bg-blue-600 dark:text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md dark:bg-[#2b3844] dark:text-gray-200 dark:hover:bg-slate-700'
               }`}
             >
               {pageNum}
