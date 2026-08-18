@@ -147,7 +147,7 @@ export const CountryDetailsPage: React.FC = () => {
           retryLabel="Back to Home"
         />
       ) : (
-        <div className="mt-8 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24">
+        <div className="mt-20 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-24">
           <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-gray-100 shadow-xl dark:bg-slate-700/40 dark:shadow-2xl dark:shadow-black/50">
             {country.flag?.url_svg ? (
               <img
