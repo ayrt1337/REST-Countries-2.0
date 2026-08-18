@@ -22,31 +22,20 @@ export const CountryDetailsPage: React.FC = () => {
       return;
     }
 
-    let isMounted = true;
     setIsLoading(true);
     setError(null);
 
     fetchCountryByCode(code)
       .then((data) => {
-        if (isMounted) {
-          setCountry(data);
-        }
+        setCountry(data);
       })
       .catch((err) => {
-        if (isMounted) {
-          console.error("Failed to load country details:", err);
-          setError(getApiErrorMessage(err, "Unable to load country details."));
-        }
+        console.error("Failed to load country details:", err);
+        setError(getApiErrorMessage(err, "Unable to load country details."));
       })
       .finally(() => {
-        if (isMounted) {
-          setIsLoading(false);
-        }
+        setIsLoading(false);
       });
-
-    return () => {
-      isMounted = false;
-    };
   }, [code]);
 
   const handleBack = () => {
@@ -100,7 +89,7 @@ export const CountryDetailsPage: React.FC = () => {
       </div>
 
       {isLoading ? (
-        <div className="mt-8 grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24 animate-pulse">
+        <div className="mt-20 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-24 animate-pulse">
           <div className="aspect-[16/10] w-full rounded-xl bg-gray-200 dark:bg-slate-700/50 shadow-lg" />
           <div className="space-y-6">
             <div className="h-10 w-3/4 rounded-lg bg-gray-200 dark:bg-slate-700/50" />
