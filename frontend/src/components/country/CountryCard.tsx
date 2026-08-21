@@ -12,6 +12,7 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
   const population = country.population ? country.population.toLocaleString('en-US') : '0';
   const capital = country.capitals?.[0]?.name || 'N/A';
   const alpha3 = country.codes?.alpha_3 || '';
+  const region = country.region || 'N/A';
 
   return (
     <Link
@@ -45,7 +46,7 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
           </p>
           <p>
             <span className="font-semibold text-gray-900 dark:text-white">Region: </span>
-            <span>{country.region || (country as { region?: string }).region || 'N/A'}</span>
+            <span>{region}</span>
           </p>
           <p>
             <span className="font-semibold text-gray-900 dark:text-white">Capital: </span>
